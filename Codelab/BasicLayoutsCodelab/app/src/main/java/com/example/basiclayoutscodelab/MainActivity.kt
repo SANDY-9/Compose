@@ -31,16 +31,18 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+    SearchBar()
 }
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     BasicLayoutsCodelabTheme {
-        Greeting("Android")
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            Greeting("Android")
+        }
     }
 }
