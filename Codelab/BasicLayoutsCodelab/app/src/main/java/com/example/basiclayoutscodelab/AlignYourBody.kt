@@ -1,9 +1,12 @@
 package com.example.basiclayoutscodelab
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,8 +18,29 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
+
+@Composable
+fun AlignYourBodyRow(
+    modifier: Modifier = Modifier
+) {
+    LazyRow(
+        modifier = modifier,
+        // Arrangement.spacedBy() 메서드를 사용하여 각 하위 컴포저블 사이에 고정된 공간을 추가
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        // LazyRow의 측면에 패딩을 추가
+        contentPadding = PaddingValues(horizontal = 16.dp)
+    ) {
+        items(10) { item ->
+            AlignYourBodyElement(
+                "Inversions"
+            )
+        }
+    }
+}
+
 @Composable
 fun AlignYourBodyElement(
+    str: String,
     modifier: Modifier = Modifier
 ) {
     /*
@@ -40,7 +64,7 @@ fun AlignYourBodyElement(
         )
         Text(
             modifier = modifier.paddingFromBaseline(top = 24.dp, bottom = 8.dp),
-            text = "Inversions"
+            text = str
         )
     }
     /*
@@ -66,5 +90,6 @@ fun AlignYourBodyElement(
 @Preview(name = "AlignYourBodyElement")
 @Composable
 private fun PreviewAlignYourBodyElement() {
-    AlignYourBodyElement()
+    AlignYourBodyRow()
+    //AlignYourBodyElement()
 }
