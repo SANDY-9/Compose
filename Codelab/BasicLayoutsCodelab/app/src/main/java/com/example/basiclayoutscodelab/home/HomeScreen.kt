@@ -32,8 +32,8 @@ fun HomeScreen(
         //ScrollState : 스크롤의 현재 상태를 포함하며 외부에서 스크롤 상태를 수정하는 데 사용
         modifier = modifier.verticalScroll(rememberScrollState())
     ) {
-        Spacer(modifier.height(16.dp))
-        SearchBar(modifier.padding(horizontal = 16.dp))
+        Spacer(Modifier.height(16.dp))
+        SearchBar(Modifier.padding(horizontal = 16.dp))
         HomeSection(title = "AlignYourBody") {
             AlignYourBodyRow()
         }
