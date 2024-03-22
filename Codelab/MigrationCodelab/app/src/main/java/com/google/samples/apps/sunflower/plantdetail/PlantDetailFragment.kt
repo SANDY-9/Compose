@@ -21,6 +21,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.material.MaterialTheme
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.app.ShareCompat
 import androidx.core.widget.NestedScrollView
@@ -34,12 +36,10 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding
+import com.google.samples.apps.sunflower.theme.SunflowerTheme
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
 
-/**
- * A fragment representing a single Plant detail screen.
- */
 class PlantDetailFragment : Fragment() {
 
     private val args: PlantDetailFragmentArgs by navArgs()
@@ -107,6 +107,29 @@ class PlantDetailFragment : Fragment() {
                         true
                     }
                     else -> false
+                }
+            }
+
+            /**
+             * Compose로 마이그레이션 -> xml 파일에서 마이그레이션할 레이아웃 영역을 제거하고 ComposeView 추가
+             * <androidx.compose.ui.platform.ComposeView
+             *         android:id="@+id/compose_view"
+             *         android:layout_width="match_parent"
+             *         android:layout_height="match_parent"/>
+             * Compose에서 UI를 렌더링하려면 호스트 활동 또는 프래그먼트가 필요함
+             */
+            composeView.apply {
+
+                // 프래그먼트 transaction이 발생해 ComposeView가 분리된 상태임에도
+                // Compose UI 요소는 프래그먼트의 뷰 수명 주기와 다르기 때문에 Compose UI 요소는 계속 표시되어 메모리릭 발생
+                // DisposeOnViewTreeLifecycleDestroyed: 프래그먼트의 LifecycleOwner가 소멸되면 컴포지션을 삭제
+                setViewCompositionStrategy(
+                    ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
+                )
+                setContent {
+                    SunflowerTheme {
+                        PlantDetailDescription(plantDetailViewModel)
+                    }
                 }
             }
         }
