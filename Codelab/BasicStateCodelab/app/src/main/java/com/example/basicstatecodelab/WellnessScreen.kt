@@ -1,6 +1,8 @@
 package com.example.basicstatecodelab
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -17,11 +19,20 @@ fun WellnessScreen(modifier: Modifier = Modifier) {
 
 @Composable
 fun WaterCounter(modifier: Modifier = Modifier) {
-    val count = 0
-    Text(
-        modifier = modifier.padding(16.dp),
-        text = "You've had $count glasses."
-    )
+    // count 변수에 다른 값을 설정해도 Compose에서 이 값을 상태 변경으로 감지하지 않아 아무 일도 일어나지 않음
+    // 상태가 변경될 때 Compose에 화면을 다시 그려야 한다고(리컴포저블) 알리지 않았기 때문
+    var count = 0
+    Column(modifier = modifier.padding(16.dp)) {
+        Text(
+            text = "You've had $count glasses."
+        )
+        Button(
+            onClick = { count++ },
+            modifier = Modifier.padding(top = 8.dp)
+        ) {
+            Text("Add one")
+        }
+    }
 }
 
 @Preview
