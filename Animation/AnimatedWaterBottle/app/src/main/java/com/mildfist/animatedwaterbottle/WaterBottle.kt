@@ -1,6 +1,7 @@
 package com.mildfist.animatedwaterbottle
 
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
@@ -40,6 +41,12 @@ fun WaterBottle(
         targetValue = usedWaterAmount.toFloat() / totalWaterAmount.toFloat(),
         label = "Water Waves Animation",
         animationSpec = tween(durationMillis = 1000)
+    ).value
+
+    val usedWaterAmountAnimation = animateIntAsState(
+        targetValue = usedWaterAmount,
+        label = "Used Water Amount Animation",
+        animationSpec = tween(durationMillis = 500)
     ).value
 
     Box(
@@ -142,12 +149,12 @@ fun WaterBottle(
                     fontSize = 44.sp
                 )
             ) {
-                append(usedWaterAmount.toString())
+                append(usedWaterAmountAnimation.toString())
             }
             withStyle(
                 style = SpanStyle(
                     color = if(waterPercentage > 0.5f) bottleColor else waterColor,
-                    fontSize = 44.sp
+                    fontSize = 24.sp
                 )
             ) {
                 append(" ")

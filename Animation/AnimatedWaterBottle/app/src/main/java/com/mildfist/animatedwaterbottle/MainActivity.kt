@@ -45,14 +45,14 @@ class MainActivity : ComponentActivity() {
                     }
 
                     Column(
-                       // modifier = Modifier.fillMaxSize(),
+                        modifier = Modifier.fillMaxSize(),
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center
                     ) {
                         WaterBottle(
                             modifier = Modifier.width(250.dp),
                             totalWaterAmount = totalWaterAmount,
-                            unit = "",
+                            unit = "mL",
                             usedWaterAmount = usedAmount
                         )
                         Spacer(modifier = Modifier.height(20.dp))
