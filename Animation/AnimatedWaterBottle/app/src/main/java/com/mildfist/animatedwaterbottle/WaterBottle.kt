@@ -9,6 +9,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.clipPath
@@ -41,6 +44,9 @@ fun WaterBottle(
         Canvas(modifier = modifier.fillMaxSize()) {
             val width = size.width
             val height = size.height
+
+            val capWidth = size.width * 0.55f
+            val capHeight = size.height * 0.13f
 
             val bottleBodyPath = Path().apply {
                 moveTo(
@@ -114,8 +120,13 @@ fun WaterBottle(
                     path = waterPath,
                     color = waterColor
                 )
-
             }
+            drawRoundRect(
+                color = capColor,
+                size = Size(capWidth, capHeight),
+                topLeft = Offset(size.width / 2-capWidth/ 2f, 0f),
+                cornerRadius = CornerRadius(45f, 45f)
+            )
         }
     }
 }
