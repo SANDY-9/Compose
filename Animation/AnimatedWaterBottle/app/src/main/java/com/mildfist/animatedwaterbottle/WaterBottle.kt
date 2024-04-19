@@ -1,5 +1,7 @@
 package com.mildfist.animatedwaterbottle
 
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,11 +26,17 @@ fun WaterBottle(
     bottleColor: Color = Color.White,
     capColor: Color = Color(0xff0065b9)
 ) {
+    
+    val waterPercentage = animateFloatAsState(
+        targetValue = usedWaterAmount.toFloat() / totalWaterAmount.toFloat(),
+        label = "Water Waves Animation",
+        animationSpec = tween(durationMillis = 1000)
+    ).value
 
     Box(
         modifier = modifier
-        .width(200.dp)
-        .height(600.dp))
+            .width(200.dp)
+            .height(600.dp))
     {
         Canvas(modifier = modifier.fillMaxSize()) {
             val width = size.width
@@ -81,6 +89,32 @@ fun WaterBottle(
                     color = bottleColor,
                     size = size
                 )
+
+                val waterWavesYPosition = (1 - waterPercentage) * size.height
+                val waterPath = Path().apply {
+                    moveTo(
+                        x = 0f,
+                        y = waterWavesYPosition
+                    )
+                    lineTo(
+                        x = size.width,
+                        y = waterWavesYPosition
+                    )
+                    lineTo(
+                        x = size.width,
+                        y = size.height
+                    )
+                    lineTo(
+                        x = 0f,
+                        y = size.height
+                    )
+                    close()
+                }
+                drawPath(
+                    path = waterPath,
+                    color = waterColor
+                )
+
             }
         }
     }
