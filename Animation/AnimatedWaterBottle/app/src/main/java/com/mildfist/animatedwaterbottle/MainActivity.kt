@@ -45,7 +45,7 @@ class MainActivity : ComponentActivity() {
                     }
 
                     Column(
-                        modifier = Modifier.fillMaxSize(),
+                       // modifier = Modifier.fillMaxSize(),
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center
                     ) {
@@ -58,54 +58,12 @@ class MainActivity : ComponentActivity() {
                         Spacer(modifier = Modifier.height(20.dp))
                         Text(text = "Total amount is : $totalWaterAmount")
                         Button(
-                            onClick = { usedAmount + 200 }
+                            onClick = { usedAmount += 200 }
                         ) {
                             Text(text = "Drink")
                         }
                     }
                 }
-            }
-        }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    AnimatedWaterBottleTheme {
-        var usedAmount by remember {
-            mutableStateOf(400)
-        }
-
-        val totalWaterAmount = remember {
-            2400
-        }
-
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            WaterBottle(
-                modifier = Modifier.width(250.dp),
-                totalWaterAmount = totalWaterAmount,
-                unit = "",
-                usedWaterAmount = usedAmount
-            )
-            Spacer(modifier = Modifier.height(20.dp))
-            Text(text = "Total amount is : $totalWaterAmount")
-            Button(
-                onClick = { usedAmount + 200 }
-            ) {
-                Text(text = "Drink")
             }
         }
     }
