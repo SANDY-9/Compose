@@ -57,9 +57,9 @@ class MainActivity : ComponentActivity() {
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
-                        TextFieldExample1(this@MainActivity)
+                        TextFieldExample(this@MainActivity)
                         Spacer(modifier = Modifier.height(32.dp))
-                        OutlinedTextFieldExample1(context = this@MainActivity)
+                        OutlinedTextFieldExample(context = this@MainActivity)
                     }
                 }
             }
@@ -68,7 +68,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-private fun TextFieldExample1(context: Context) {
+private fun TextFieldExample(context: Context) {
     var filledText by remember { mutableStateOf("") }
     TextField(
         value = filledText,
@@ -123,7 +123,7 @@ private fun TextFieldExample1(context: Context) {
 }
 
 @Composable
-private fun OutlinedTextFieldExample1(context: Context) {
+private fun OutlinedTextFieldExample(context: Context) {
     var outlinedText by remember { mutableStateOf("") }
     OutlinedTextField(
         value = outlinedText,
